@@ -1,28 +1,27 @@
 Jiron
 =====
 
-Make your API self documenting and your clients adaptable to API changes. It's all in the hypermedia type.
+A self-documenting, progressive discovery API protocol ideal for AI agents.
 
-Jiron is a hypermedia type based on Siren and the Jade template language. Instead of delivering your data in JSON messages, pack that data with related links, actions that clients can request on the reperesented resource, even code on demand to upgrade the client's capabilities to deal with the given resource.
+Jiron is a faster, more token-efficient alternative to the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/docs/getting-started/intro).
+
+Make your API self documenting and your clients adaptable to API changes. It's all in the hypermedia type. Jiron is a hypermedia type based on Siren and the pug template language. Instead of delivering your data in JSON messages, pack that data with related links, actions that clients can request on the reperesented resource, even code on demand to upgrade the client's capabilities to deal with the given resource.
 
 > Jiron: Part or small portion of a whole: patch of fog.
-
-## Status
-
-Just an idea for mapping Siren semantics to HTML as opposed to JSON for an enhanced API data delivery experience, explored briefly in the book, ["Programming JavaScript Applications"](https://pjabook.com).
 
 
 ## Justification
 
-APIs are becoming crucially important to application development, but there are a few problems with the current state of types used for APIs:
+APIs are becoming crucially important to AI agents and application development in general, but there are a few problems with the current state of types used for APIs:
 
 
 ### JSON troubles
 
-JSON is a defacto standard format for types, and the syntax is terse, but:
+JSON is a defacto standard format for types, used in the MCP specification, and the syntax is relatively terse, but:
 
 1. It meets very few requirements for proper hypermedia support.
 2. What few hypermedia types for JSON that do exist tend to have far fewer affordances than HTML.
+3. It consumes far more tokens than Jiron to represent the same information.
 
 
 ### HTML troubles
@@ -51,9 +50,9 @@ Even with the extra affordances that Siren provides, it is still not as rich as 
 * Style support
 
 
-### Jade
+### pug
 
-Jade is a very terse, elegant markup syntax that was originally designed as a template language that compiles to HTML. One day as I was contemplating the problems we have with our current breed of hypermedia types, it occurred to me that Jade might be a great format to base a new type on.
+pug is a very terse, elegant markup syntax that was originally designed as a template language that compiles to HTML. One day as I was contemplating the problems we have with our current breed of hypermedia types, it occurred to me that pug might be a great format to base a new type on.
 
 Some things it has going for it:
 
@@ -76,11 +75,11 @@ What we need is a best of all worlds. Something terse like JSON, but expressive 
 
 ## Jiron
 
-Jiron is a mapping of Siren semantics combined with the expressive power and affordances of HTML, with the slick syntax of Jade.
+Jiron is a mapping of Siren semantics combined with the expressive power and affordances of HTML, with the slick syntax of pug.
 
 Here's a sample:
 
-```jade
+```pug
 head(profile='http://ericelliott.me/profiles/resource')
   title Albums
   
@@ -169,7 +168,7 @@ And the equivalent HTML:
 
 Here's a translation of the example from the Siren README:
 
-```jade
+```pug
 head
   title Order
 body.order
@@ -297,12 +296,12 @@ Which translates to the following HTML:
 </body>
 ```
 
-Since `jiron+jade` is based on an existing HTML template syntax, the documents are easy to interpret. Browserify users get support on the client side automatically using [https://github.com/substack/node-jadeify](node-jadeify). You can also use browserify to export an AMD module or stand-alone module for the browser.
+Since `jiron+pug` is based on an existing HTML template syntax. It can be interpreted programatically by pug processors, and by any sufficiently advanced AI language model.
 
 Using it in the browser is simple:
 
 ```js
-jade.render('a.album(href="/albums/123") Pretty Hate Machine');
+pugRenderer('a.album(href="/albums/123") Pretty Hate Machine');
 ```
 
 Which creates the string:
@@ -332,7 +331,7 @@ Tricky with HTML:
 
 Jiron is purposely very similar to HTML, except where HTML falls short on important affordances. For example, HTML lacks support for important methods, and doesn't prescribe any mapping between intended actions and HTTP method. HTML is also a little inconsistent with the URL for form targets, calling it `action` instead of `href` (which is used in almost all other cases involving links). Jiron can improve on HTML on both counts. Imagine this syntax:
 
-```jade
+```pug
 form(action='create',
   href='http://api.x.io/orders/42/items',
   type='application/x-www-form-urlencoded')
@@ -352,14 +351,14 @@ And finally be translated to this by the Jiron client:
 
 ### Support for headers in links:
 
-```jade
-a(headers='Accept:application/vnd.jiron+jade') Some Jiron resource
+```pug
+a(headers='Accept:application/vnd.jiron+pug') Some Jiron resource
 ```
 
 Which would translate to this, if HTML knew how to deal with it:
 
 ```html
-<a headers="Accept:application/vnd.jiron+jade">Some Jiron resource</a>
+<a headers="Accept:application/vnd.jiron+pug">Some Jiron resource</a>
 ```
 
 The Jiron client  will attach a link activation handler that will set the appropriate accept header and fetch the resource using AJAX.
