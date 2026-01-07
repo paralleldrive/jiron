@@ -166,6 +166,89 @@ And the equivalent HTML:
 </body>
 ```
 
+And the equivalent Siren-style JSON:
+
+```json
+{
+  "class": ["albums"],
+  "title": "Albums",
+  "properties": [
+    {
+      "name": "description",
+      "value": "A list of albums you should listen to."
+    },
+    {
+      "name": "entityCount",
+      "value": 3,
+      "attributes": {
+        "id": "entityCount",
+        "for": "entityCount",
+        "label": "Total count:"
+      }
+    }
+  ],
+  "entities": [
+    {
+      "class": ["entity", "album"],
+      "rel": ["item"],
+      "href": "/albums/a65x0qxr",
+      "properties": [
+        {
+          "name": "name",
+          "value": "Dark Side of the Moon",
+          "class": ["property", "name"]
+        },
+        {
+          "name": "artist",
+          "value": "Pink Floyd",
+          "class": ["property", "artist"]
+        }
+      ]
+    },
+    {
+      "class": ["entity", "album"],
+      "rel": ["item"],
+      "href": "/albums/a7ff1qxw",
+      "properties": [
+        {
+          "name": "name",
+          "value": "Random Access Memories",
+          "class": ["property", "name"]
+        },
+        {
+          "name": "artist",
+          "value": "Daft Punk",
+          "class": ["property", "artist"]
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "rel": ["next"],
+      "href": "/albums?offset=2&limit=1",
+      "title": "Next",
+      "class": ["link"]
+    },
+    {
+      "rel": ["self", "canonical"],
+      "href": "http://albums.com/albums",
+      "class": ["link"]
+    }
+  ]
+}
+```
+
+### Token Usage Comparison
+
+The same information represented in different formats:
+
+* **Jiron (pug)**: 918 characters
+* **JSON**: 1,405 characters (53% more than Jiron)
+* **HTML**: 1,434 characters (56% more than Jiron)
+
+As you can see, Jiron's pug-based syntax is significantly more token-efficient than both JSON and HTML, while still maintaining the rich hypermedia semantics of Siren. The JSON representation requires expanding attributes into child objects, which adds significant overhead compared to Jiron's terse syntax.
+
 Here's a translation of the example from the Siren README:
 
 ```pug
