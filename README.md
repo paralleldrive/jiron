@@ -179,12 +179,7 @@ And the equivalent Siren-style JSON:
     },
     {
       "name": "entityCount",
-      "value": 3,
-      "attributes": {
-        "id": "entityCount",
-        "for": "entityCount",
-        "label": "Total count:"
-      }
+      "value": 3
     }
   ],
   "entities": [
@@ -195,13 +190,11 @@ And the equivalent Siren-style JSON:
       "properties": [
         {
           "name": "name",
-          "value": "Dark Side of the Moon",
-          "class": ["property", "name"]
+          "value": "Dark Side of the Moon"
         },
         {
           "name": "artist",
-          "value": "Pink Floyd",
-          "class": ["property", "artist"]
+          "value": "Pink Floyd"
         }
       ]
     },
@@ -212,13 +205,11 @@ And the equivalent Siren-style JSON:
       "properties": [
         {
           "name": "name",
-          "value": "Random Access Memories",
-          "class": ["property", "name"]
+          "value": "Random Access Memories"
         },
         {
           "name": "artist",
-          "value": "Daft Punk",
-          "class": ["property", "artist"]
+          "value": "Daft Punk"
         }
       ]
     }
@@ -227,13 +218,11 @@ And the equivalent Siren-style JSON:
     {
       "rel": ["next"],
       "href": "/albums?offset=2&limit=1",
-      "title": "Next",
-      "class": ["link"]
+      "title": "Next"
     },
     {
       "rel": ["self", "canonical"],
-      "href": "http://albums.com/albums",
-      "class": ["link"]
+      "href": "http://albums.com/albums"
     }
   ]
 }
@@ -244,10 +233,10 @@ And the equivalent Siren-style JSON:
 The same information represented in different formats:
 
 * **Jiron (pug)**: 918 characters
-* **JSON**: 1,405 characters (53% more than Jiron)
+* **JSON**: 1,065 characters (16% more than Jiron)
 * **HTML**: 1,434 characters (56% more than Jiron)
 
-As you can see, Jiron's pug-based syntax is significantly more token-efficient than both JSON and HTML, while still maintaining the rich hypermedia semantics of Siren. The JSON representation requires expanding attributes into child objects, which adds significant overhead compared to Jiron's terse syntax.
+As you can see, Jiron's pug-based syntax is significantly more token-efficient than both JSON and HTML, while still maintaining the rich hypermedia semantics of Siren. The JSON representation requires expanding simple values into objects with explicit "name" and "value" properties, which adds overhead compared to Jiron's terse syntax where properties can be expressed inline.
 
 Here's a translation of the example from the Siren README:
 

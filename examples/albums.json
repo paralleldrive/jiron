@@ -8,12 +8,7 @@
     },
     {
       "name": "entityCount",
-      "value": 3,
-      "attributes": {
-        "id": "entityCount",
-        "for": "entityCount",
-        "label": "Total count:"
-      }
+      "value": 3
     }
   ],
   "entities": [
@@ -24,13 +19,11 @@
       "properties": [
         {
           "name": "name",
-          "value": "Dark Side of the Moon",
-          "class": ["property", "name"]
+          "value": "Dark Side of the Moon"
         },
         {
           "name": "artist",
-          "value": "Pink Floyd",
-          "class": ["property", "artist"]
+          "value": "Pink Floyd"
         }
       ]
     },
@@ -41,13 +34,11 @@
       "properties": [
         {
           "name": "name",
-          "value": "Random Access Memories",
-          "class": ["property", "name"]
+          "value": "Random Access Memories"
         },
         {
           "name": "artist",
-          "value": "Daft Punk",
-          "class": ["property", "artist"]
+          "value": "Daft Punk"
         }
       ]
     }
@@ -56,13 +47,11 @@
     {
       "rel": ["next"],
       "href": "/albums?offset=2&limit=1",
-      "title": "Next",
-      "class": ["link"]
+      "title": "Next"
     },
     {
       "rel": ["self", "canonical"],
-      "href": "http://albums.com/albums",
-      "class": ["link"]
+      "href": "http://albums.com/albums"
     }
   ]
 }
