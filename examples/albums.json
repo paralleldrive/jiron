@@ -1,0 +1,57 @@
+{
+  "class": ["albums"],
+  "title": "Albums",
+  "properties": [
+    {
+      "name": "description",
+      "value": "A list of albums you should listen to."
+    },
+    {
+      "name": "entityCount",
+      "value": 3
+    }
+  ],
+  "entities": [
+    {
+      "class": ["entity", "album"],
+      "rel": ["item"],
+      "href": "/albums/a65x0qxr",
+      "properties": [
+        {
+          "name": "name",
+          "value": "Dark Side of the Moon"
+        },
+        {
+          "name": "artist",
+          "value": "Pink Floyd"
+        }
+      ]
+    },
+    {
+      "class": ["entity", "album"],
+      "rel": ["item"],
+      "href": "/albums/a7ff1qxw",
+      "properties": [
+        {
+          "name": "name",
+          "value": "Random Access Memories"
+        },
+        {
+          "name": "artist",
+          "value": "Daft Punk"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "rel": ["next"],
+      "href": "/albums?offset=2&limit=1",
+      "title": "Next"
+    },
+    {
+      "rel": ["self", "canonical"],
+      "href": "http://albums.com/albums"
+    }
+  ]
+}

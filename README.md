@@ -166,6 +166,78 @@ And the equivalent HTML:
 </body>
 ```
 
+And the equivalent Siren-style JSON:
+
+```json
+{
+  "class": ["albums"],
+  "title": "Albums",
+  "properties": [
+    {
+      "name": "description",
+      "value": "A list of albums you should listen to."
+    },
+    {
+      "name": "entityCount",
+      "value": 3
+    }
+  ],
+  "entities": [
+    {
+      "class": ["entity", "album"],
+      "rel": ["item"],
+      "href": "/albums/a65x0qxr",
+      "properties": [
+        {
+          "name": "name",
+          "value": "Dark Side of the Moon"
+        },
+        {
+          "name": "artist",
+          "value": "Pink Floyd"
+        }
+      ]
+    },
+    {
+      "class": ["entity", "album"],
+      "rel": ["item"],
+      "href": "/albums/a7ff1qxw",
+      "properties": [
+        {
+          "name": "name",
+          "value": "Random Access Memories"
+        },
+        {
+          "name": "artist",
+          "value": "Daft Punk"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "rel": ["next"],
+      "href": "/albums?offset=2&limit=1",
+      "title": "Next"
+    },
+    {
+      "rel": ["self", "canonical"],
+      "href": "http://albums.com/albums"
+    }
+  ]
+}
+```
+
+### Token Usage Comparison
+
+The same information represented in different formats:
+
+* **Jiron (pug)**: 918 characters
+* **JSON**: 1,065 characters (16% more than Jiron)
+* **HTML**: 1,434 characters (56% more than Jiron)
+
+As you can see, Jiron's pug-based syntax is significantly more token-efficient than both JSON and HTML, while still maintaining the rich hypermedia semantics of Siren. The JSON representation requires expanding simple values into objects with explicit "name" and "value" properties, which adds overhead compared to Jiron's terse syntax where properties can be expressed inline.
+
 Here's a translation of the example from the Siren README:
 
 ```pug
