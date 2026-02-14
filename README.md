@@ -448,7 +448,7 @@ ul.properties
 
 ### Links
 
-Links represent navigational transitions between resources. In Jiron, links are represented within a `ul.links` list. Each link uses an anchor (`a`) or `link` element with a `rel` attribute describing the relationship and an `href` attribute pointing to the target URI.
+Links represent navigational transitions between resources. In Jiron, links are represented within a `ul.links` list. Each link uses an anchor (`a`) or `link` element with a `rel` attribute describing the relationship and an `href` attribute pointing to the target URI. Links SHOULD include a `rel` attribute that defines the relationship according to [Web Linking (RFC8288)](https://www.rfc-editor.org/rfc/rfc8288.html) and [Link Relations](https://www.iana.org/assignments/link-relations/link-relations.xhtml).
 
 ```pug
 ul.links
@@ -460,11 +460,9 @@ ul.links
     a(rel='previous', href='http://api.x.io/orders/41') Previous
 ```
 
-Links should include a `rel` attribute that defines the relationship according to [Web Linking (RFC8288)](https://www.rfc-editor.org/rfc/rfc8288.html) and [Link Relations](https://www.iana.org/assignments/link-relations/link-relations.xhtml).
-
 ### Actions
 
-Actions represent available behaviors that an entity exposes. In Jiron, actions are represented as forms within a `ul.actions` list. Unlike standard HTML forms which use `action` for the URL, Jiron uses the `action` attribute to specify the semantic action name (e.g., `create`, `update`, `delete`, `patch`) and the `href` attribute for the action's URI. This separation allows Jiron to map semantic actions to appropriate HTTP methods.
+Actions represent available behaviors that an entity exposes. In Jiron, actions are represented as forms within a `ul.actions` list. Unlike standard HTML forms which use `action` for the URL, Jiron uses the `action` attribute to specify the semantic action name (e.g., `index`, `show`, `create`, `update`, `patch`, `delete`) and the `href` attribute for the action's URI. This separation allows Jiron to map semantic actions to appropriate HTTP methods.
 
 ```pug
 ul.actions
