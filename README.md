@@ -383,3 +383,186 @@ Which would translate to this, if HTML knew how to deal with it:
 ```
 
 The Jiron client  will attach a link activation handler that will set the appropriate accept header and fetch the resource using AJAX.
+
+
+## Semantic Elements
+
+Jiron implements all the semantic elements defined in the [Siren specification](https://github.com/kevinswiber/siren). This section documents how these semantics are represented in Jiron's pug syntax and corresponding HTML output.
+
+### Entity
+
+An entity is a URI-addressable resource that has properties and actions associated with it. In Jiron, entities are represented using the `.entity` class. Root entities are typically represented by the `body` element, while sub-entities are list items within an `ul.entities` list.
+
+#### Root Entity Example
+
+```pug
+body.order
+  h1 Order
+  // properties, entities, actions, and links go here
+```
+
+#### Sub-Entity Example
+
+```pug
+ul.entities
+  li.entity.album
+    a(rel='item', href='/albums/123')
+      ul.properties
+        li.property.name Album Name
+```
+
+### Classes
+
+Classes describe the nature of an entity's content based on its current representation. In Jiron, classes are added as CSS class names to elements. Multiple classes can be applied to describe different aspects of the entity.
+
+```pug
+// Single class
+body.order
+
+// Multiple classes
+li.entity.items.collection
+li.entity.info.customer
+```
+
+### Properties
+
+Properties are key-value pairs that describe the state of an entity. In Jiron, properties are represented as list items within a `ul.properties` element. Each property is wrapped in a `li.property` element.
+
+```pug
+ul.properties
+  li.property
+    label Order Number
+      span.orderNumber 42
+  li.property
+    label Status
+      span.status pending
+```
+
+Properties can also include descriptions:
+
+```pug
+ul.properties
+  li.property
+    p.description A list of albums you should listen to.
+```
+
+### Links
+
+Links represent navigational transitions between resources. In Jiron, links are represented within a `ul.links` list. Each link uses an anchor (`a`) or `link` element with a `rel` attribute describing the relationship and an `href` attribute pointing to the target URI.
+
+```pug
+ul.links
+  li.link
+    a(rel='self', href='http://api.x.io/orders/42') Self
+  li.link
+    a(rel='next', href='http://api.x.io/orders/43') Next
+  li.link
+    a(rel='previous', href='http://api.x.io/orders/41') Previous
+```
+
+Links should include a `rel` attribute that defines the relationship according to [Web Linking (RFC5988)](https://tools.ietf.org/html/rfc5988) and [Link Relations](https://www.iana.org/assignments/link-relations/link-relations.xhtml).
+
+### Actions
+
+Actions represent available behaviors that an entity exposes. In Jiron, actions are represented as forms within a `ul.actions` list. Actions use the `action` attribute to specify the semantic action name (e.g., `create`, `update`, `delete`, `patch`) and the `href` attribute for the action's URI.
+
+```pug
+ul.actions
+  li.action
+    form(action='create',
+      href='http://api.x.io/orders/42/items',
+      type='application/x-www-form-urlencoded')
+      fieldset
+        legend Add Item
+        label Product Code
+          input(name='productCode', type='text')
+        label Quantity
+          input(name='quantity', type='number')
+```
+
+The `action` attribute maps to HTTP methods:
+- `index` → GET (collection)
+- `show` → GET (single resource)
+- `create` → POST
+- `update` → PUT
+- `patch` → PATCH
+- `delete` → DELETE
+
+#### Action Fields
+
+Fields within actions represent form controls. Each field has a `name` attribute and can specify:
+- `type`: The input type (text, number, hidden, etc.)
+- `value`: A default or pre-filled value
+- Other HTML input attributes
+
+```pug
+label Order Number
+  input(name='orderNumber', type='hidden', value='42')
+label Product Code
+  input(name='productCode', type='text')
+```
+
+### Title
+
+The title provides descriptive text about an entity. In Jiron, titles can be represented in multiple ways:
+
+```pug
+// As the document title
+head
+  title Order
+
+// As a heading within the entity
+body.order
+  h1 Order
+  h1.title Order Details
+```
+
+### Sub-Entities
+
+Sub-entities represent relationships between entities within context. Jiron supports two types of sub-entities:
+
+#### Embedded Links
+
+An embedded link is a sub-entity that references another resource via its URI. The client may choose to load the linked resource separately.
+
+```pug
+ul.entities
+  li.entity.items.collection
+    a(rel='http://x.io/rels/order-items',
+      href='http://api.x.io/orders/42/items')
+      | Items
+```
+
+#### Embedded Representations
+
+An embedded representation is a sub-entity that includes the complete entity data inline, avoiding the need for an additional request.
+
+```pug
+ul.entities
+  li.entity.info.customer
+    a(rel='http://x.io/rels/customer',
+      href='http://api.x.io/customers/pj123')
+      ul.properties
+        li.property
+          label Customer ID
+            span.customerId pj123
+        li.property
+          label Name
+            span.name Peter Joseph
+```
+
+Both types of sub-entities MUST include a `rel` attribute to describe their relationship to the parent entity.
+
+### Relationship Between Elements
+
+The semantic elements work together to create a complete hypermedia representation:
+
+1. **Entity** - The core resource being represented
+2. **Classes** - Classify what type of entity it is
+3. **Properties** - Describe the entity's current state
+4. **Sub-entities** - Show related entities in context
+5. **Links** - Provide navigation to related resources
+6. **Actions** - Enable state transitions through user interactions
+7. **Title** - Give human-readable context
+
+This structure allows clients (including AI agents) to understand not just the data, but how to interact with the API and navigate between resources.
