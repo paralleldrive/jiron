@@ -315,7 +315,7 @@ Now you can add that to a `documentFragment` and use CSS selectors to query it. 
 
 ## Interacting with Jiron Endpoints
 
-Jiron builds on web platform standards, making it straightforward to interact with Jiron APIs using standard HTTP requests. When invoking an action on a Jiron endpoint, you pass the semantically named action with an `Action` header.
+Jiron builds on web platform standards, making it straightforward to interact with Jiron APIs using standard HTTP requests. When invoking an action on a Jiron endpoint, you pass the semantically named action with a `Jiron-Action` header.
 
 ### Example Request
 
@@ -324,12 +324,12 @@ Here's an example of creating a new album resource:
 ```
 POST http://api.nin.io/albums
 Content-Type: application/x-www-form-urlencoded
-Action: create
+Jiron-Action: create
 
 artist=Nine+Inch+Nails&title=Tron%3A+Ares&haloNumber=36&trackCount=24&releaseDate=2025-09-19&label=Walt+Disney+Records+%2F+The+Null+Corporation
 ```
 
-The `Action` header specifies the semantic action you want to perform (e.g., `create`, `update`, `delete`, `patch`). The server uses this header along with the HTTP method to determine how to process your request.
+The `Jiron-Action` header specifies the semantic action you want to perform (e.g., `create`, `update`, `delete`, `patch`). The server uses this header along with the HTTP method to determine how to process your request.
 
 This approach allows Jiron to support a richer set of actions than standard REST while maintaining compatibility with HTTP standards and web infrastructure.
 
